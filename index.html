@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>March 2025 Efficiency Tracker</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@400;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Nastaliq Urdu', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            min-height: 100vh;
+            padding: 20px;
+            direction: rtl;
+            color: #e2e8f0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .month-info {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .day-card {
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 15px;
+            padding: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            min-height: 120px;
+        }
+
+        .day-card:hover {
+            transform: translateY(-3px);
+            border-color: #667eea;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .day-card.active {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .day-card.future {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .day-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #f8fafc;
+            margin-bottom: 5px;
+        }
+
+        .day-name {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 10px;
+        }
+
+        .efficiency-badge {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .efficiency-high { background: #10b981; color: white; }
+        .efficiency-medium { background: #f59e0b; color: white; }
+        .efficiency-low { background: #ef4444; color: white; }
+        .efficiency-none { background: #475569; color: #94a3b8; }
+
+        .detail-panel {
+            background: rgba(30, 41, 59, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: none;
+        }
+
+        .detail-panel.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .detail-title {
+            font-size: 1.5rem;
+            color: #fbbf24;
+        }
+
+        .close-btn {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .tasks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .task-card {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .task-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .m-task {
+            border: 2px solid #ec4899;
+            background: rgba(236, 72, 153, 0.1);
+        }
+
+        .m-task .task-title {
+            color: #ec4899;
+        }
+
+        .m-checkbox {
+            width: 60px;
+            height: 60px;
+            border: 3px solid #ec4899;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #ec4899;
+            cursor: pointer;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        .m-checkbox:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
+        }
+
+        .m-checkbox.active {
+            background: #ec4899;
+            color: white;
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.6);
+        }
+
+        .m-status {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .m-status.good { color: #10b981; }
+        .m-status.bad { color: #ef4444; }
+
+        .options-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .option-btn {
+            padding: 8px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: rgba(15, 23, 42, 0.6);
+            color: #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            min-width: 50px;
+        }
+
+        .option-btn:hover {
+            border-color: #667eea;
+        }
+
+        .option-btn.active {
+            background: #667eea;
+            border-color: #667eea;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .money-inputs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .money-input {
+            flex: 1;
+            padding: 10px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #e2e8f0;
+            font-size: 1rem;
+        }
+
+        .money-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-credit { background: #22c55e; color: white; }
+        .btn-debit { background: #ef4444; color: white; }
+
+        .money-summary {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .stats-section {
+            background: rgba(30, 41, 59, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .stats-title {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #fbbf24;
+            margin-bottom: 25px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .efficiency-chart {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .chart-title {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #f8fafc;
+        }
+
+        .efficiency-bar {
+            height: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .efficiency-fill {
+            height: 100%;
+            border-radius: 15px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+        }
+
+        .day-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .day-chip {
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .save-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .calendar-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+            
+            .day-card {
+                min-height: 100px;
+                padding: 10px;
+            }
+            
+            .tasks-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>📅 March 2025 Efficiency Tracker</h1>
+    <div class="month-info">1 March - 31 March | M = Avoided is Good (+5 bonus)</div>
+
+    <div class="calendar-grid" id="calendarGrid"></div>
+
+    <div class="detail-panel" id="detailPanel">
+        <div class="detail-header">
+            <div class="detail-title" id="selectedDateTitle">1 March 2025</div>
+            <button class="close-btn" onclick="closeDetail()">✕ Close</button>
+        </div>
+
+        <div class="tasks-grid">
+            <div class="task-card">
+                <div class="task-title">🕌 5 Namaz</div>
+                <div class="options-row" id="namazOptions">
+                    <button class="option-btn" onclick="toggleTask('namaz', 'fajr')">Fajr</button>
+                    <button class="option-btn" onclick="toggleTask('namaz', 'zuhr')">Zuhr</button>
+                    <button class="option-btn" onclick="toggleTask('namaz', 'asr')">Asr</button>
+                    <button class="option-btn" onclick="toggleTask('namaz', 'maghrib')">Maghrib</button>
+                    <button class="option-btn" onclick="toggleTask('namaz', 'isha')">Isha</button>
+                </div>
+            </div>
+
+            <div class="task-card">
+                <div class="task-title">📌 Pinterest</div>
+                <div class="options-row">
+                    <button class="option-btn" onclick="toggleSingle('pinterest')">Posted</button>
+                </div>
+            </div>
+
+            <div class="task-card">
+                <div class="task-title">📖 Quran</div>
+                <div class="options-row">
+                    <button class="option-btn" onclick="toggleSingle('quran')">1 Raku Read</button>
+                </div>
+            </div>
+
+            <div class="task-card">
+                <div class="task-title">🎵 TikTok Posts</div>
+                <div class="options-row" id="tiktokOptions">
+                    <button class="option-btn" onclick="toggleTask('tiktok', 'post1')">Post 1</button>
+                    <button class="option-btn" onclick="toggleTask('tiktok', 'post2')">Post 2</button>
+                    <button class="option-btn" onclick="toggleTask('tiktok', 'post3')">Post 3</button>
+                </div>
+            </div>
+
+            <div class="task-card">
+                <div class="task-title">🎯 Daily Mission</div>
+                <input type="text" class="money-input" id="missionInput" placeholder="Write mission..." style="width: 100%; margin-bottom: 10px;">
+                <div class="options-row">
+                    <button class="option-btn" onclick="toggleSingle('mission')">Mission Complete</button>
+                </div>
+            </div>
+
+            <div class="task-card">
+                <div class="task-title">💰 Money Tracker</div>
+                <div class="money-inputs">
+                    <input type="number" class="money-input" id="creditInput" placeholder="Income">
+                    <button class="money-btn btn-credit" onclick="addTransaction('credit')">+</button>
+                </div>
+                <div class="money-inputs">
+                    <input type="number" class="money-input" id="debitInput" placeholder="Expense">
+                    <button class="money-btn btn-debit" onclick="addTransaction('debit')">-</button>
+                </div>
+                <div class="money-summary">
+                    <span>Balance: <span id="dayBalance">₨0</span></span>
+                    <span style="font-size: 0.8rem; color: #94a3b8;">In: ₨<span id="dayCredit">0</span> | Out: ₨<span id="dayDebit">0</span></span>
+                </div>
+            </div>
+
+            <div class="task-card m-task">
+                <div class="task-title">Ⓜ️ M Mark (NOT doing = Good)</div>
+                <div class="m-checkbox" id="mCheckbox" onclick="toggleM()">M</div>
+                <div class="m-status good" id="mStatus">✓ Good (M avoided) - +5 bonus!</div>
+            </div>
+        </div>
+
+        <button class="save-btn" onclick="saveDay()">💾 Save Day</button>
+    </div>
+
+    <div class="stats-section">
+        <div class="stats-title">📊 Monthly Statistics</div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" style="color: #10b981;" id="totalNamaz">0</div>
+                <div class="stat-label">Total Namaz</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: #f59e0b;" id="totalQuran">0</div>
+                <div class="stat-label">Quran Days</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: #00f2ea;" id="totalTiktok">0</div>
+                <div class="stat-label">TikTok Posts</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: #22c55e;" id="totalBalance">₨0</div>
+                <div class="stat-label">Total Savings</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: #ec4899;" id="mAvoided">0</div>
+                <div class="stat-label">M Avoided Days</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: #fbbf24;" id="avgEfficiency">0%</div>
+                <div class="stat-label">Avg Efficiency</div>
+            </div>
+        </div>
+
+        <div class="efficiency-chart">
+            <div class="chart-title">📈 Daily Efficiency Progress</div>
+            <div class="efficiency-bar">
+                <div class="efficiency-fill" id="monthlyEfficiencyBar" style="width: 0%; background: linear-gradient(90deg, #ef4444, #f59e0b, #10b981);">0%</div>
+            </div>
+            <div class="day-list" id="efficiencyList"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const MONTH_START = new Date('2025-03-01');
+    const MONTH_END = new Date('2025-03-31');
+    const TODAY = new Date();
+    
+    let monthlyData = {};
+    let currentDay = null;
+    let currentDayData = null;
+
+    function init() {
+        generateCalendar();
+        loadData();
+        updateMonthlyStats();
+    }
+
+    function generateCalendar() {
+        const grid = document.getElementById('calendarGrid');
+        const startDate = new Date(MONTH_START);
+        
+        for (let i = 0; i < 31; i++) {
+            const date = new Date(startDate);
+            date.setDate(date.getDate() + i);
+            
+            if (date > MONTH_END) break;
+            
+            const dayNum = date.getDate();
+            const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
+            const isFuture = date > TODAY;
+            const dateKey = formatDateKey(date);
+            
+            const dayCard = document.createElement('div');
+            dayCard.className = `day-card ${isFuture ? 'future' : ''}`;
+            dayCard.id = `day-${dateKey}`;
+            dayCard.onclick = () => !isFuture && openDay(dateKey, dayNum, dayName);
+            
+            dayCard.innerHTML = `
+                <div class="day-number">${dayNum}</div>
+                <div class="day-name">${dayName}</div>
+                <div class="efficiency-badge efficiency-none" id="badge-${dateKey}">--</div>
+            `;
+            
+            grid.appendChild(dayCard);
+        }
+    }
+
+    function formatDateKey(date) {
+        return date.toISOString().split('T')[0];
+    }
+
+    function openDay(dateKey, dayNum, dayName) {
+        currentDay = dateKey;
+        currentDayData = monthlyData[dateKey] || getEmptyDayData();
+        
+        document.getElementById('selectedDateTitle').textContent = `${dayNum} March 2025 (${dayName})`;
+        document.getElementById('detailPanel').classList.add('active');
+        
+        document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('mCheckbox').classList.remove('active');
+        document.getElementById('mStatus').textContent = '✓ Good (M avoided) - +5 bonus!';
+        document.getElementById('mStatus').className = 'm-status good';
+        document.getElementById('missionInput').value = '';
+        document.getElementById('dayBalance').textContent = '₨0';
+        document.getElementById('dayCredit').textContent = '0';
+        document.getElementById('dayDebit').textContent = '0';
+        
+        if (monthlyData[dateKey]) {
+            loadDayData(monthlyData[dateKey]);
+        }
+        
+        window.scrollTo(0, document.getElementById('detailPanel').offsetTop - 20);
+    }
+
+    function getEmptyDayData() {
+        return {
+            namaz: { fajr: false, zuhr: false, asr: false, maghrib: false, isha: false },
+            pinterest: false,
+            quran: false,
+            tiktok: { post1: false, post2: false, post3: false },
+            mission: { text: '', completed: false },
+            money: { credit: 0, debit: 0 },
+            m: false,
+            efficiency: 0
+        };
+    }
+
+    function loadDayData(data) {
+        Object.keys(data.namaz).forEach(key => {
+            if (data.namaz[key]) {
+                document.querySelector(`[onclick="toggleTask('namaz', '${key}')"]`)?.classList.add('active');
+            }
+        });
+        
+        if (data.pinterest) {
+            document.querySelector(`[onclick="toggleSingle('pinterest')"]`)?.classList.add('active');
+        }
+        
+        if (data.quran) {
+            document.querySelector(`[onclick="toggleSingle('quran')"]`)?.classList.add('active');
+        }
+        
+        Object.keys(data.tiktok).forEach(key => {
+            if (data.tiktok[key]) {
+                document.querySelector(`[onclick="toggleTask('tiktok', '${key}')"]`)?.classList.add('active');
+            }
+        });
+        
+        if (data.mission.text) {
+            document.getElementById('missionInput').value = data.mission.text;
+        }
+        if (data.mission.completed) {
+            document.querySelector(`[onclick="toggleSingle('mission')"]`)?.classList.add('active');
+        }
+        
+        document.getElementById('dayBalance').textContent = '₨' + (data.money.credit - data.money.debit);
+        document.getElementById('dayCredit').textContent = data.money.credit;
+        document.getElementById('dayDebit').textContent = data.money.debit;
+        
+        if (data.m) {
+            document.getElementById('mCheckbox').classList.add('active');
+            document.getElementById('mStatus').textContent = '✗ Bad (M done) - No bonus';
+            document.getElementById('mStatus').className = 'm-status bad';
+        }
+    }
+
+    function toggleTask(category, key) {
+        event.target.classList.toggle('active');
+        currentDayData[category][key] = event.target.classList.contains('active');
+    }
+
+    function toggleSingle(category) {
+        const btn = event.target;
+        const wasActive = btn.classList.contains('active');
+        
+        btn.classList.toggle('active');
+        
+        if (category === 'mission') {
+            currentDayData.mission.completed = !wasActive;
+            currentDayData.mission.text = document.getElementById('missionInput').value;
+        } else {
+            currentDayData[category] = !wasActive;
+        }
+    }
+
+    function toggleM() {
+        const checkbox = document.getElementById('mCheckbox');
+        const status = document.getElementById('mStatus');
+        
+        checkbox.classList.toggle('active');
+        currentDayData.m = checkbox.classList.contains('active');
+        
+        if (currentDayData.m) {
+            status.textContent = '✗ Bad (M done) - No bonus';
+            status.className = 'm-status bad';
+        } else {
+            status.textContent = '✓ Good (M avoided) - +5 bonus!';
+            status.className = 'm-status good';
+        }
+    }
+
+    function addTransaction(type) {
+        const input = document.getElementById(type + 'Input');
+        const amount = parseFloat(input.value) || 0;
+        
+        if (amount > 0) {
+            currentDayData.money[type] += amount;
+            input.value = '';
+            updateMoneyDisplay();
+        }
+    }
+
+    function updateMoneyDisplay() {
+        const balance = currentDayData.money.credit - currentDayData.money.debit;
+        document.getElementById('dayBalance').textContent = '₨' + balance;
+        document.getElementById('dayCredit').textContent = currentDayData.money.credit;
+        document.getElementById('dayDebit').textContent = currentDayData.money.debit;
+    }
+
+    function calculateEfficiency() {
+        let score = 0;
+        let maxScore = 0;
+        
+        const namazCount = Object.values(currentDayData.namaz).filter(v => v).length;
+        score += namazCount * 2;
+        maxScore += 10;
+        
+        if (currentDayData.pinterest) score += 2;
+        maxScore += 2;
+        
+        if (currentDayData.quran) score += 3;
+        maxScore += 3;
+        
+        const tiktokCount = Object.values(currentDayData.tiktok).filter(v => v).length;
+        score += tiktokCount;
+        maxScore += 3;
+        
+        if (currentDayData.mission.completed) score += 3;
+        maxScore += 3;
+        
+        if (currentDayData.money.credit > 0 || currentDayData.money.debit > 0) score += 2;
+        maxScore += 2;
+        
+        if (!currentDayData.m) score += 5;
+        maxScore += 5;
+        
+        return Math.round((score / maxScore) * 100);
+    }
+
+    function saveDay() {
+        currentDayData.efficiency = calculateEfficiency();
+        monthlyData[currentDay] = currentDayData;
+        
+        updateDayBadge(currentDay, currentDayData.efficiency);
+        localStorage.setItem('march2025_data', JSON.stringify(monthlyData));
+        
+        updateMonthlyStats();
+        alert('✅ Day saved successfully!');
+        closeDetail();
+    }
+
+    function updateDayBadge(dateKey, efficiency) {
+        const badge = document.getElementById(`badge-${dateKey}`);
+        const card = document.getElementById(`day-${dateKey}`);
+        
+        badge.textContent = efficiency + '%';
+        badge.className = 'efficiency-badge';
+        card.classList.add('active');
+        
+        if (efficiency >= 80) badge.classList.add('efficiency-high');
+        else if (efficiency >= 50) badge.classList.add('efficiency-medium');
+        else if (efficiency > 0) badge.classList.add('efficiency-low');
+        else badge.classList.add('efficiency-none');
+    }
+
+    function closeDetail() {
+        document.getElementById('detailPanel').classList.remove('active');
+        currentDay = null;
+        currentDayData = null;
+    }
+
+    function updateMonthlyStats() {
+        let totalNamaz = 0;
+        let totalQuran = 0;
+        let totalTiktok = 0;
+        let totalCredit = 0;
+        let totalDebit = 0;
+        let mAvoided = 0;
+        let totalEfficiency = 0;
+        let daysCount = 0;
+        
+        Object.values(monthlyData).forEach(day => {
+            totalNamaz += Object.values(day.namaz).filter(v => v).length;
+            if (day.quran) totalQuran++;
+            totalTiktok += Object.values(day.tiktok).filter(v => v).length;
+            totalCredit += day.money.credit;
+            totalDebit += day.money.debit;
+            if (!day.m) mAvoided++;
+            
+            if (day.efficiency > 0) {
+                totalEfficiency += day.efficiency;
+                daysCount++;
+            }
+        });
+        
+        document.getElementById('totalNamaz').textContent = totalNamaz;
+        document.getElementById('totalQuran').textContent = totalQuran;
+        document.getElementById('totalTiktok').textContent = totalTiktok;
+        document.getElementById('totalBalance').textContent = '₨' + (totalCredit - totalDebit).toLocaleString();
+        document.getElementById('mAvoided').textContent = mAvoided;
+        
+        const avgEff = daysCount ? Math.round(totalEfficiency / daysCount) : 0;
+        document.getElementById('avgEfficiency').textContent = avgEff + '%';
+        
+        document.getElementById('monthlyEfficiencyBar').style.width = avgEff + '%';
+        document.getElementById('monthlyEfficiencyBar').textContent = avgEff + '%';
+        
+        const list = document.getElementById('efficiencyList');
+        list.innerHTML = '';
+        
+        Object.entries(monthlyData).forEach(([date, data]) => {
+            if (data.efficiency > 0) {
+                const dayNum = date.split('-')[2];
+                const chip = document.createElement('div');
+                chip.className = 'day-chip';
+                chip.textContent = `Mar ${dayNum}: ${data.efficiency}%`;
+                
+                if (data.efficiency >= 80) chip.style.background = '#10b981';
+                else if (data.efficiency >= 50) chip.style.background = '#f59e0b';
+                else chip.style.background = '#ef4444';
+                
+                chip.style.color = 'white';
+                list.appendChild(chip);
+            }
+        });
+    }
+
+    function loadData() {
+        const saved = localStorage.getItem('march2025_data');
+        if (saved) {
+            monthlyData = JSON.parse(saved);
+            Object.entries(monthlyData).forEach(([date, data]) => {
+                if (data.efficiency > 0) {
+                    updateDayBadge(date, data.efficiency);
+                }
+            });
+        }
+    }
+
+    init();
+</script>
+
+</body>
+</html>
