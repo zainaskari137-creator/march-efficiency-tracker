@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>March 2025 - Ultimate Efficiency Tracker</title>
+    <title>March 2025 - Complete Life & Finance Tracker</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap');
 
@@ -21,6 +21,7 @@
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
+            --info: #06b6d4;
             --dark: #0f172a;
             --darker: #020617;
             --card: #1e293b;
@@ -48,7 +49,8 @@
             height: 100%;
             background: 
                 radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
             pointer-events: none;
             z-index: -1;
         }
@@ -65,7 +67,7 @@
         }
 
         h1 {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             font-weight: 800;
             background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 30%, #ec4899 70%, #8b5cf6 100%);
             -webkit-background-clip: text;
@@ -92,7 +94,7 @@
             color: white;
         }
 
-        /* Color Settings Panel */
+        /* Color Panel */
         .color-panel {
             background: rgba(30, 41, 59, 0.8);
             backdrop-filter: blur(10px);
@@ -107,81 +109,53 @@
             font-weight: 700;
             margin-bottom: 20px;
             color: var(--accent);
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
         .color-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
         }
 
         .color-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px;
+            gap: 10px;
+            padding: 10px;
             background: rgba(15, 23, 42, 0.6);
-            border-radius: 12px;
-            border: 1px solid var(--border);
+            border-radius: 10px;
         }
 
         .color-picker-wrapper {
-            position: relative;
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
             overflow: hidden;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease;
-        }
-
-        .color-picker-wrapper:hover {
-            transform: scale(1.1);
         }
 
         .color-picker {
-            position: absolute;
-            top: -50%;
-            left: -50%;
             width: 200%;
             height: 200%;
+            margin: -50%;
             cursor: pointer;
             border: none;
-            padding: 0;
-            margin: 0;
         }
 
         .color-label {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 500;
-            color: var(--text);
-        }
-
-        .color-value {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-family: monospace;
         }
 
         .reset-colors-btn {
-            margin-top: 20px;
-            padding: 12px 24px;
-            background: linear-gradient(135deg, var(--danger), #dc2626);
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: var(--danger);
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .reset-colors-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3);
         }
 
         /* Calendar */
@@ -194,13 +168,11 @@
 
         .day-card {
             background: rgba(30, 41, 59, 0.6);
-            backdrop-filter: blur(12px);
             border-radius: 16px;
             padding: 15px;
             border: 1px solid var(--border);
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
+            transition: all 0.3s ease;
             min-height: 110px;
         }
 
@@ -251,7 +223,6 @@
         /* Detail Panel */
         .detail-panel {
             background: rgba(30, 41, 59, 0.95);
-            backdrop-filter: blur(20px);
             border-radius: 25px;
             padding: 30px;
             margin-bottom: 30px;
@@ -290,7 +261,6 @@
             border-radius: 10px;
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.3s ease;
         }
 
         .close-btn:hover {
@@ -298,10 +268,53 @@
             color: white;
         }
 
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 2px solid var(--border);
+            color: var(--text);
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            border-color: var(--primary);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-color: transparent;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         /* Tasks Grid */
         .tasks-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }
 
@@ -366,10 +379,9 @@
         }
 
         .namaz-btn.ada { border-color: rgba(16, 185, 129, 0.3); color: var(--success); }
-        .namaz-btn.ada.active { background: var(--success); color: white; box-shadow: 0 0 20px rgba(16,185,129,0.4); }
-
+        .namaz-btn.ada.active { background: var(--success); color: white; }
         .namaz-btn.qaza { border-color: rgba(245, 158, 11, 0.3); color: var(--warning); }
-        .namaz-btn.qaza.active { background: var(--warning); color: white; box-shadow: 0 0 20px rgba(245,158,11,0.4); }
+        .namaz-btn.qaza.active { background: var(--warning); color: white; }
 
         /* Options */
         .options-row { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -387,76 +399,269 @@
             min-width: 100px;
         }
 
-        .option-btn:hover { border-color: var(--primary); transform: translateY(-2px); }
+        .option-btn:hover { border-color: var(--primary); }
         .option-btn.active {
             background: var(--primary);
             color: white;
             transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(99,102,241,0.4);
         }
 
-        /* Money */
-        .money-input-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
-        
-        .money-row { display: flex; gap: 8px; }
+        /* Money Section Enhanced */
+        .money-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .money-tab {
+            padding: 10px 20px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 2px solid var(--border);
+            color: var(--text);
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .money-tab:hover { border-color: var(--info); }
+        .money-tab.active {
+            background: var(--info);
+            color: white;
+            border-color: transparent;
+        }
+
+        .money-content { display: none; }
+        .money-content.active { display: block; animation: fadeIn 0.3s ease; }
+
+        .money-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .money-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
 
         .money-input {
             flex: 1;
-            padding: 10px;
+            padding: 12px;
             background: rgba(15,23,42,0.8);
             border: 2px solid rgba(255,255,255,0.1);
-            border-radius: 8px;
+            border-radius: 10px;
             color: var(--text);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+        }
+
+        .money-input:focus {
+            outline: none;
+            border-color: var(--info);
         }
 
         .money-desc { flex: 2; }
+        .money-amount { flex: 1; }
 
         .money-btn {
-            padding: 10px 16px;
+            padding: 12px 20px;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .btn-credit { background: var(--success); color: white; }
-        .btn-credit:hover { box-shadow: 0 0 20px rgba(16,185,129,0.4); }
+        .btn-income {
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: white;
+        }
 
-        .btn-debit { background: var(--danger); color: white; }
-        .btn-debit:hover { box-shadow: 0 0 20px rgba(239,68,68,0.4); }
+        .btn-expense {
+            background: linear-gradient(135deg, var(--danger), #dc2626);
+            color: white;
+        }
 
-        .transactions-list {
-            max-height: 120px;
+        .btn-savings {
+            background: linear-gradient(135deg, var(--info), #0891b2);
+            color: white;
+        }
+
+        /* Transactions */
+        .transactions-container {
+            max-height: 200px;
             overflow-y: auto;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            padding-right: 5px;
+        }
+
+        .transactions-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .transactions-container::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 3px;
         }
 
         .transaction-item {
             display: flex;
             justify-content: space-between;
-            padding: 8px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 6px;
-            margin-bottom: 6px;
-            font-size: 0.85rem;
-        }
-
-        .transaction-credit { color: var(--success); font-weight: 600; }
-        .transaction-debit { color: var(--danger); font-weight: 600; }
-
-        .money-summary {
-            display: flex;
-            justify-content: space-between;
+            align-items: center;
             padding: 12px;
-            background: rgba(15,23,42,0.8);
+            background: rgba(255,255,255,0.03);
             border-radius: 10px;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
         }
 
-        .balance-amount { font-size: 1.3rem; font-weight: 700; }
-        .balance-positive { color: var(--success); }
-        .balance-negative { color: var(--danger); }
+        .transaction-item:hover {
+            background: rgba(255,255,255,0.06);
+            transform: translateX(5px);
+        }
+
+        .transaction-income { border-left-color: var(--success); }
+        .transaction-expense { border-left-color: var(--danger); }
+        .transaction-savings { border-left-color: var(--info); }
+
+        .transaction-info {
+            flex: 1;
+        }
+
+        .transaction-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .transaction-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .transaction-amount {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .amount-income { color: var(--success); }
+        .amount-expense { color: var(--danger); }
+        .amount-savings { color: var(--info); }
+
+        .delete-btn {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-right: 10px;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .delete-btn:hover {
+            background: var(--danger);
+            color: white;
+        }
+
+        /* Summary Cards */
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .summary-card {
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .summary-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .summary-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .summary-change {
+            font-size: 0.85rem;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        .positive { color: var(--success); }
+        .negative { color: var(--danger); }
+        .neutral { color: var(--info); }
+
+        /* Profit/Loss Analysis */
+        .analysis-section {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .analysis-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .progress-bar {
+            height: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .analysis-item {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+        }
+
+        .analysis-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
 
         /* M Section */
         .m-container {
@@ -483,8 +688,8 @@
             background: rgba(15,23,42,0.8);
         }
 
-        .m-checkbox:hover { transform: scale(1.1); box-shadow: 0 0 30px rgba(236,72,153,0.4); }
-        .m-checkbox.active { background: var(--secondary); color: white; border-color: transparent; }
+        .m-checkbox:hover { transform: scale(1.1); }
+        .m-checkbox.active { background: var(--secondary); color: white; }
 
         .m-status {
             padding: 8px 16px;
@@ -509,8 +714,6 @@
             cursor: pointer;
             margin-top: 25px;
             transition: all 0.4s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .save-btn:hover {
@@ -518,10 +721,9 @@
             box-shadow: 0 20px 40px rgba(99,102,241,0.4);
         }
 
-        /* Stats */
+        /* Stats Section */
         .stats-section {
             background: rgba(30, 41, 59, 0.6);
-            backdrop-filter: blur(20px);
             border-radius: 25px;
             padding: 30px;
             border: 1px solid var(--border);
@@ -548,171 +750,94 @@
             padding: 20px;
             text-align: center;
             border: 1px solid var(--border);
-            transition: all 0.3s ease;
         }
 
-        .stat-card:hover { transform: translateY(-5px); }
-
         .stat-value {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 800;
             margin-bottom: 5px;
         }
 
-        .stat-label { color: var(--text-muted); font-size: 0.9rem; }
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
 
-        .efficiency-chart {
+        /* Financial Overview */
+        .finance-overview {
             background: rgba(15, 23, 42, 0.6);
             border-radius: 16px;
-            padding: 20px;
+            padding: 25px;
+            margin-top: 25px;
         }
 
-        .chart-title { font-size: 1.1rem; margin-bottom: 15px; font-weight: 600; }
-
-        .efficiency-bar {
-            height: 35px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 15px;
-        }
-
-        .efficiency-fill {
-            height: 100%;
-            border-radius: 10px;
-            transition: width 1s ease;
+        .finance-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--info);
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: white;
+            gap: 10px;
         }
 
-        .day-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+        .finance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
 
-        .day-chip {
-            padding: 8px 14px;
-            border-radius: 20px;
+        .finance-card {
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .finance-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .finance-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .finance-sub {
             font-size: 0.85rem;
-            font-weight: 600;
-            color: white;
+            color: var(--text-muted);
+            margin-top: 5px;
         }
 
         @media (max-width: 768px) {
             .calendar-grid { grid-template-columns: repeat(2, 1fr); }
             h1 { font-size: 2rem; }
             .color-grid { grid-template-columns: 1fr; }
+            .summary-cards { grid-template-columns: 1fr; }
+            .analysis-grid { grid-template-columns: 1fr; }
         }
     </style>
-<base target="_blank">
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <h1>March 2025 Efficiency Tracker</h1>
+        <h1>March 2025 Complete Tracker</h1>
         <div class="month-info">
-            <span>1 March - 31 March</span>
-            <span class="badge">Custom Colors Enabled</span>
+            <span>Life + Finance Management</span>
+            <span class="badge">Full Data History</span>
         </div>
     </div>
 
-    <!-- Color Settings Panel -->
+    <!-- Color Settings -->
     <div class="color-panel">
-        <div class="color-panel-title">🎨 Customize Your Colors</div>
-        <div class="color-grid">
-            <div class="color-item">
-                <div class="color-picker-wrapper" id="wrap-namaz">
-                    <input type="color" class="color-picker" id="color-namaz" value="#10b981">
-                </div>
-                <div>
-                    <div class="color-label">Namaz (Ada)</div>
-                    <div class="color-value" id="val-namaz">#10b981</div>
-                </div>
-            </div>
-            <div class="color-item">
-                <div class="color-picker-wrapper" id="wrap-qaza">
-                    <input type="color" class="color-picker" id="color-qaza" value="#f59e0b">
-                </div>
-                <div>
-                    <div class="color-label">Namaz (Qaza)</div>
-                    <div class="color-value" id="val-qaza">#f59e0b</div>
-                </div>
-            </div>
-            <div class="color-item">
-                <div class="color-picker-wrapper" id="wrap-pinterest">
-                    <input type="color" class="color-picker" id="color-pinterest" value="#e60023">
-                </div>
-                <div>
-                    <div class="color-label">Pinterest</div>
-                    <div class="color-value" id="val-pinterest">#e60023</div>
-                </div>
-            </div>
-            <div class="color-item">
-                <div class="color-picker-wrapper" id="wrap-quran">
-                    <input type="color" class="color-picker" id="color-quran" value="#f59e0b">
-                </div>
-                <div>
-                    <div class="color-label">Quran</div>
-                    <div class="color-value" id="val-quran">#f59e0b</div>
-                </div>
-            </div>
-            <div class="color-item">
-                <div class="color-picker-wrapper" id="wrap-tiktok">
-                    <input type="color" class="color-picker" id="color-tiktok" value="#00f2ea">
-                </div>
-                <div>
-                    <div class="color-label">TikTok</div>
-                    <div class="color-value" id="val-tiktok">#00f2ea</div>
-                </div>
-            </div>
-            <div class="color-item">
-                <div class="color-picker-wrapper" id="wrap-linkedin">
-                    <input type="color" class="color-picker" id="color-linkedin" value="#0a66c2">
-                </div>
-                <div>
-                    <div class="color-label">LinkedIn</div>
-                    <div class="color-value" id="val-linkedin">#0a66c2</div>
-                </div>
-            </div>
-            <div class="color-item">
-                <div class="color-picker-wrapper" id="wrap-mission">
-                    <input type="color" class="color-picker" id="color-mission" value="#8b5cf6">
-                </div>
-                <div>
-                    <div class="color-label">Mission</div>
-                    <div class="color-value" id="val-mission">#8b5cf6</div>
-                </div>
-            </div>
-            <div class="color-item">
-                <div class="color-picker-wrapper" id="wrap-money">
-                    <input type="color" class="color-picker" id="color-money" value="#22c55e">
-                </div>
-                <div>
-                    <div class="color-label">Money</div>
-                    <div class="color-value" id="val-money">#22c55e</div>
-                </div>
-            </div>
-            <div class="color-item">
-                <div class="color-picker-wrapper" id="wrap-m">
-                    <input type="color" class="color-picker" id="color-m" value="#ec4899">
-                </div>
-                <div>
-                    <div class="color-label">M Mark</div>
-                    <div class="color-value" id="val-m">#ec4899</div>
-                </div>
-            </div>
-            <div class="color-item">
-                <div class="color-picker-wrapper" id="wrap-primary">
-                    <input type="color" class="color-picker" id="color-primary" value="#6366f1">
-                </div>
-                <div>
-                    <div class="color-label">Primary Theme</div>
-                    <div class="color-value" id="val-primary">#6366f1</div>
-                </div>
-            </div>
-        </div>
-        <button class="reset-colors-btn" onclick="resetColors()">↺ Reset to Default</button>
+        <div class="color-panel-title">🎨 Customize Colors</div>
+        <div class="color-grid" id="colorGrid"></div>
+        <button class="reset-colors-btn" onclick="resetColors()">↺ Reset Colors</button>
     </div>
 
     <!-- Calendar -->
@@ -725,165 +850,286 @@
             <button class="close-btn" onclick="closeDetail()">✕ Close</button>
         </div>
 
-        <div class="tasks-grid">
-            <!-- Namaz -->
-            <div class="task-card" id="card-namaz">
-                <div class="task-title">
-                    <div class="task-icon" id="icon-namaz">🕌</div>
-                    5 Namaz (Ada: 2pts | Qaza: 1pt)
-                </div>
-                <div class="namaz-row" id="namazContainer"></div>
-            </div>
+        <!-- Main Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('spiritual')">🕌 Spiritual</button>
+            <button class="tab-btn" onclick="switchTab('work')">💼 Work</button>
+            <button class="tab-btn" onclick="switchTab('finance')">💰 Finance</button>
+        </div>
 
-            <!-- Pinterest -->
-            <div class="task-card" id="card-pinterest">
-                <div class="task-title">
-                    <div class="task-icon" id="icon-pinterest">📌</div>
-                    Pinterest Post (+2)
-                </div>
-                <div class="options-row">
-                    <button class="option-btn" id="btn-pinterest" onclick="toggleSingle('pinterest')">Posted</button>
-                </div>
-            </div>
-
-            <!-- Quran -->
-            <div class="task-card" id="card-quran">
-                <div class="task-title">
-                    <div class="task-icon" id="icon-quran">📖</div>
-                    Quran - 1 Raku (+3)
-                </div>
-                <div class="options-row">
-                    <button class="option-btn" id="btn-quran" onclick="toggleSingle('quran')">Read</button>
-                </div>
-            </div>
-
-            <!-- TikTok -->
-            <div class="task-card" id="card-tiktok">
-                <div class="task-title">
-                    <div class="task-icon" id="icon-tiktok">🎵</div>
-                    TikTok Posts (1pt each)
-                </div>
-                <div class="options-row" id="tiktokOptions">
-                    <button class="option-btn" id="btn-tiktok-1" onclick="toggleTask('tiktok', 'post1')">Post 1</button>
-                    <button class="option-btn" id="btn-tiktok-2" onclick="toggleTask('tiktok', 'post2')">Post 2</button>
-                    <button class="option-btn" id="btn-tiktok-3" onclick="toggleTask('tiktok', 'post3')">Post 3</button>
-                </div>
-            </div>
-
-            <!-- LinkedIn -->
-            <div class="task-card" id="card-linkedin">
-                <div class="task-title">
-                    <div class="task-icon" id="icon-linkedin">💼</div>
-                    LinkedIn Post (+2)
-                </div>
-                <div class="options-row">
-                    <button class="option-btn" id="btn-linkedin" onclick="toggleSingle('linkedin')">Posted</button>
-                </div>
-            </div>
-
-            <!-- Mission -->
-            <div class="task-card" id="card-mission">
-                <div class="task-title">
-                    <div class="task-icon" id="icon-mission">🎯</div>
-                    Daily Mission (+3)
-                </div>
-                <input type="text" class="money-input" id="missionInput" placeholder="Write your mission..." style="width: 100%; margin-bottom: 12px;">
-                <div class="options-row">
-                    <button class="option-btn" id="btn-mission" onclick="toggleSingle('mission')">Complete</button>
-                </div>
-            </div>
-
-            <!-- Money -->
-            <div class="task-card" id="card-money">
-                <div class="task-title">
-                    <div class="task-icon" id="icon-money">💰</div>
-                    Money Tracker (+2)
-                </div>
-                <div class="money-input-group">
-                    <div class="money-row">
-                        <input type="text" class="money-input money-desc" id="creditDesc" placeholder="From whom? (e.g. Salary)">
-                        <input type="number" class="money-input" id="creditAmount" placeholder="Amount">
-                        <button class="money-btn btn-credit" id="btn-credit" onclick="addMoney('credit')">+</button>
+        <!-- Spiritual Tab -->
+        <div class="tab-content active" id="tab-spiritual">
+            <div class="tasks-grid">
+                <!-- Namaz -->
+                <div class="task-card" id="card-namaz">
+                    <div class="task-title">
+                        <div class="task-icon" id="icon-namaz">🕌</div>
+                        5 Namaz (Ada: 2pts | Qaza: 1pt)
                     </div>
-                    <div class="money-row">
-                        <input type="text" class="money-input money-desc" id="debitDesc" placeholder="For what? (e.g. Food)">
-                        <input type="number" class="money-input" id="debitAmount" placeholder="Amount">
-                        <button class="money-btn btn-debit" id="btn-debit" onclick="addMoney('debit')">-</button>
+                    <div class="namaz-row" id="namazContainer"></div>
+                </div>
+
+                <!-- Quran -->
+                <div class="task-card" id="card-quran">
+                    <div class="task-title">
+                        <div class="task-icon" id="icon-quran">📖</div>
+                        Quran - 1 Raku (+3)
+                    </div>
+                    <div class="options-row">
+                        <button class="option-btn" id="btn-quran" onclick="toggleSingle('quran')">Read</button>
                     </div>
                 </div>
-                <div class="transactions-list" id="transactionsList"></div>
-                <div class="money-summary">
-                    <div>
-                        <div style="font-size: 0.8rem; color: var(--text-muted);">Balance</div>
-                        <div class="balance-amount balance-positive" id="netBalance">₨0</div>
-                    </div>
-                    <div style="text-align: left; font-size: 0.8rem;">
-                        <div style="color: var(--success);">In: ₨<span id="totalIn">0</span></div>
-                        <div style="color: var(--danger); margin-top: 4px;">Out: ₨<span id="totalOut">0</span></div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- M -->
-            <div class="task-card" id="card-m">
-                <div class="task-title">
-                    <div class="task-icon" id="icon-m">Ⓜ️</div>
-                    M Status (Avoid = +5 Bonus)
-                </div>
-                <div class="m-container">
-                    <div class="m-checkbox" id="mCheckbox" onclick="toggleM()">M</div>
-                    <div class="m-status good" id="mStatus">✓ Good! M avoided (+5 bonus)</div>
+                <!-- M -->
+                <div class="task-card" id="card-m">
+                    <div class="task-title">
+                        <div class="task-icon" id="icon-m">Ⓜ️</div>
+                        M Status (Avoid = +5 Bonus)
+                    </div>
+                    <div class="m-container">
+                        <div class="m-checkbox" id="mCheckbox" onclick="toggleM()">M</div>
+                        <div class="m-status good" id="mStatus">✓ Good! M avoided (+5 bonus)</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <button class="save-btn" onclick="saveDay()">💾 Save Day Progress</button>
+        <!-- Work Tab -->
+        <div class="tab-content" id="tab-work">
+            <div class="tasks-grid">
+                <!-- Pinterest -->
+                <div class="task-card" id="card-pinterest">
+                    <div class="task-title">
+                        <div class="task-icon" id="icon-pinterest">📌</div>
+                        Pinterest Post (+2)
+                    </div>
+                    <div class="options-row">
+                        <button class="option-btn" id="btn-pinterest" onclick="toggleSingle('pinterest')">Posted</button>
+                    </div>
+                </div>
+
+                <!-- TikTok -->
+                <div class="task-card" id="card-tiktok">
+                    <div class="task-title">
+                        <div class="task-icon" id="icon-tiktok">🎵</div>
+                        TikTok Posts (1pt each)
+                    </div>
+                    <div class="options-row" id="tiktokOptions">
+                        <button class="option-btn" onclick="toggleTask('tiktok', 'post1')">Post 1</button>
+                        <button class="option-btn" onclick="toggleTask('tiktok', 'post2')">Post 2</button>
+                        <button class="option-btn" onclick="toggleTask('tiktok', 'post3')">Post 3</button>
+                    </div>
+                </div>
+
+                <!-- LinkedIn -->
+                <div class="task-card" id="card-linkedin">
+                    <div class="task-title">
+                        <div class="task-icon" id="icon-linkedin">💼</div>
+                        LinkedIn Post (+2)
+                    </div>
+                    <div class="options-row">
+                        <button class="option-btn" id="btn-linkedin" onclick="toggleSingle('linkedin')">Posted</button>
+                    </div>
+                </div>
+
+                <!-- Mission -->
+                <div class="task-card" id="card-mission">
+                    <div class="task-title">
+                        <div class="task-icon" id="icon-mission">🎯</div>
+                        Daily Mission (+3)
+                    </div>
+                    <input type="text" class="money-input" id="missionInput" placeholder="Write your mission..." style="width: 100%; margin-bottom: 12px;">
+                    <div class="options-row">
+                        <button class="option-btn" id="btn-mission" onclick="toggleSingle('mission')">Complete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Finance Tab -->
+        <div class="tab-content" id="tab-finance">
+            <!-- Summary Cards -->
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <div class="summary-label">Total Income</div>
+                    <div class="summary-value positive" id="dayTotalIncome">₨0</div>
+                    <div class="summary-change" id="incomeChange">+0 today</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-label">Total Expenses</div>
+                    <div class="summary-value negative" id="dayTotalExpense">₨0</div>
+                    <div class="summary-change" id="expenseChange">-0 today</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-label">Savings Added</div>
+                    <div class="summary-value neutral" id="dayTotalSavings">₨0</div>
+                    <div class="summary-change" id="savingsChange">+0 today</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-label">Net Balance</div>
+                    <div class="summary-value" id="dayNetBalance">₨0</div>
+                    <div class="summary-change" id="balanceChange">0 today</div>
+                </div>
+            </div>
+
+            <!-- Money Tabs -->
+            <div class="money-tabs">
+                <button class="money-tab active" onclick="switchMoneyTab('income')">📥 Income</button>
+                <button class="money-tab" onclick="switchMoneyTab('expense')">📤 Expenses</button>
+                <button class="money-tab" onclick="switchMoneyTab('savings')">🏦 Savings</button>
+                <button class="money-tab" onclick="switchMoneyTab('history')">📜 History</button>
+            </div>
+
+            <!-- Income Tab -->
+            <div class="money-content active" id="money-income">
+                <div class="money-input-group">
+                    <div class="money-row">
+                        <input type="text" class="money-input money-desc" id="incomeSource" placeholder="Source (e.g. Salary, Gift, Business)">
+                        <input type="number" class="money-input money-amount" id="incomeAmount" placeholder="Amount">
+                        <button class="money-btn btn-income" onclick="addTransaction('income')">+ Add Income</button>
+                    </div>
+                </div>
+                <div class="transactions-container" id="incomeList"></div>
+            </div>
+
+            <!-- Expense Tab -->
+            <div class="money-content" id="money-expense">
+                <div class="money-input-group">
+                    <div class="money-row">
+                        <input type="text" class="money-input money-desc" id="expenseCategory" placeholder="Category (e.g. Food, Transport, Bills)">
+                        <input type="text" class="money-input money-desc" id="expenseItem" placeholder="Item/Details">
+                        <input type="number" class="money-input money-amount" id="expenseAmount" placeholder="Amount">
+                        <button class="money-btn btn-expense" onclick="addTransaction('expense')">- Add Expense</button>
+                    </div>
+                </div>
+                <div class="transactions-container" id="expenseList"></div>
+            </div>
+
+            <!-- Savings Tab -->
+            <div class="money-content" id="money-savings">
+                <div class="money-input-group">
+                    <div class="money-row">
+                        <input type="text" class="money-input money-desc" id="savingsPurpose" placeholder="Purpose (e.g. Emergency, Travel, Investment)">
+                        <input type="number" class="money-input money-amount" id="savingsAmount" placeholder="Amount to Save">
+                        <button class="money-btn btn-savings" onclick="addTransaction('savings')">💎 Add to Savings</button>
+                    </div>
+                </div>
+                <div class="transactions-container" id="savingsList"></div>
+            </div>
+
+            <!-- History Tab -->
+            <div class="money-content" id="money-history">
+                <div class="transactions-container" id="allTransactionsList" style="max-height: 300px;"></div>
+            </div>
+
+            <!-- Analysis -->
+            <div class="analysis-section">
+                <div class="analysis-title">📊 Profit/Loss Analysis</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="profitRatio" style="width: 50%; background: linear-gradient(90deg, var(--success), var(--info));"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--text-muted);">
+                    <span>Expenses</span>
+                    <span>Profit Margin</span>
+                    <span>Income</span>
+                </div>
+                <div class="analysis-grid">
+                    <div class="analysis-item">
+                        <div class="analysis-label" style="font-size: 0.85rem; color: var(--text-muted);">Savings Rate</div>
+                        <div class="analysis-value neutral" id="savingsRate">0%</div>
+                    </div>
+                    <div class="analysis-item">
+                        <div class="analysis-label" style="font-size: 0.85rem; color: var(--text-muted);">Profit/Loss</div>
+                        <div class="analysis-value" id="profitLossValue">₨0</div>
+                    </div>
+                    <div class="analysis-item">
+                        <div class="analysis-label" style="font-size: 0.85rem; color: var(--text-muted);">Daily Burn Rate</div>
+                        <div class="analysis-value negative" id="burnRate">₨0</div>
+                    </div>
+                    <div class="analysis-item">
+                        <div class="analysis-label" style="font-size: 0.85rem; color: var(--text-muted);">Projected Monthly</div>
+                        <div class="analysis-value positive" id="projectedMonthly">₨0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="save-btn" onclick="saveDay()">💾 Save Complete Day Data</button>
     </div>
 
-    <!-- Stats -->
+    <!-- Monthly Stats -->
     <div class="stats-section">
-        <div class="stats-title">📊 Monthly Performance</div>
+        <div class="stats-title">📊 Monthly Overview</div>
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-value" id="statNamaz" style="color: var(--success);">0</div>
+                <div class="stat-value" style="color: var(--success);" id="statNamaz">0</div>
                 <div class="stat-label">Namaz Points</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value" id="statPinterest" style="color: #e60023;">0</div>
-                <div class="stat-label">Pinterest</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" id="statQuran" style="color: var(--warning);">0</div>
+                <div class="stat-value" style="color: var(--warning);" id="statQuran">0</div>
                 <div class="stat-label">Quran Days</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value" id="statTiktok" style="color: #00f2ea;">0</div>
-                <div class="stat-label">TikTok Posts</div>
+                <div class="stat-value" style="color: #e60023;" id="statPinterest">0</div>
+                <div class="stat-label">Pinterest</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value" id="statLinkedin" style="color: #0a66c2;">0</div>
+                <div class="stat-value" style="color: #00f2ea;" id="statTiktok">0</div>
+                <div class="stat-label">TikTok</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: #0a66c2;" id="statLinkedin">0</div>
                 <div class="stat-label">LinkedIn</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value" id="statMoney" style="color: var(--success);">₨0</div>
-                <div class="stat-label">Savings</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" id="statMAvoided" style="color: var(--secondary);">0</div>
+                <div class="stat-value" style="color: var(--secondary);" id="statMAvoided">0</div>
                 <div class="stat-label">M Avoided</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value" id="statEfficiency" style="color: var(--accent);">0%</div>
+                <div class="stat-value" style="color: var(--accent);" id="statEfficiency">0%</div>
                 <div class="stat-label">Avg Efficiency</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: var(--info);" id="statDaysTracked">0</div>
+                <div class="stat-label">Days Tracked</div>
             </div>
         </div>
 
-        <div class="efficiency-chart">
-            <div class="chart-title">📈 Daily Efficiency Progress</div>
-            <div class="efficiency-bar">
-                <div class="efficiency-fill" id="monthlyEfficiencyBar" style="width: 0%; background: linear-gradient(90deg, #ef4444, #f59e0b, #10b981, #6366f1);">0%</div>
+        <!-- Financial Overview -->
+        <div class="finance-overview">
+            <div class="finance-title">💰 Monthly Financial Summary</div>
+            <div class="finance-grid">
+                <div class="finance-card">
+                    <div class="finance-label">Total Income</div>
+                    <div class="finance-value positive" id="monthIncome">₨0</div>
+                    <div class="finance-sub" id="monthIncomeCount">0 transactions</div>
+                </div>
+                <div class="finance-card">
+                    <div class="finance-label">Total Expenses</div>
+                    <div class="finance-value negative" id="monthExpense">₨0</div>
+                    <div class="finance-sub" id="monthExpenseCount">0 transactions</div>
+                </div>
+                <div class="finance-card">
+                    <div class="finance-label">Total Savings</div>
+                    <div class="finance-value neutral" id="monthSavings">₨0</div>
+                    <div class="finance-sub" id="monthSavingsCount">0 deposits</div>
+                </div>
+                <div class="finance-card">
+                    <div class="finance-label">Net Profit/Loss</div>
+                    <div class="finance-value" id="monthProfit">₨0</div>
+                    <div class="finance-sub" id="monthProfitPercent">0% margin</div>
+                </div>
+                <div class="finance-card">
+                    <div class="finance-label">Available Cash</div>
+                    <div class="finance-value" id="monthCash">₨0</div>
+                    <div class="finance-sub">Income - Expenses</div>
+                </div>
+                <div class="finance-card">
+                    <div class="finance-label">Savings Rate</div>
+                    <div class="finance-value neutral" id="monthSavingsRate">0%</div>
+                    <div class="finance-sub">Of total income</div>
+                </div>
             </div>
-            <div class="day-chips" id="dayChips"></div>
         </div>
     </div>
 </div>
@@ -919,7 +1165,7 @@
     // Initialize
     function init() {
         loadColors();
-        setupColorPickers();
+        generateColorPickers();
         generateCalendar();
         generateNamazRows();
         applyColors();
@@ -928,57 +1174,79 @@
     }
 
     // Color Management
-    function setupColorPickers() {
-        Object.keys(colors).forEach(key => {
-            const picker = document.getElementById(`color-${key}`);
-            if (picker) {
-                picker.addEventListener('input', (e) => {
-                    colors[key] = e.target.value;
-                    document.getElementById(`val-${key}`).textContent = e.target.value;
-                    document.getElementById(`wrap-${key}`).style.background = e.target.value;
-                    applyColors();
-                    saveColors();
-                });
-                document.getElementById(`wrap-${key}`).style.background = colors[key];
-            }
+    function generateColorPickers() {
+        const grid = document.getElementById('colorGrid');
+        const colorItems = [
+            { key: 'namaz', label: 'Namaz (Ada)' },
+            { key: 'qaza', label: 'Namaz (Qaza)' },
+            { key: 'pinterest', label: 'Pinterest' },
+            { key: 'quran', label: 'Quran' },
+            { key: 'tiktok', label: 'TikTok' },
+            { key: 'linkedin', label: 'LinkedIn' },
+            { key: 'mission', label: 'Mission' },
+            { key: 'money', label: 'Money' },
+            { key: 'm', label: 'M Mark' },
+            { key: 'primary', label: 'Primary' }
+        ];
+
+        colorItems.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'color-item';
+            div.innerHTML = `
+                <div class="color-picker-wrapper" id="wrap-${item.key}" style="background: ${colors[item.key]}">
+                    <input type="color" class="color-picker" id="color-${item.key}" value="${colors[item.key]}">
+                </div>
+                <div>
+                    <div class="color-label">${item.label}</div>
+                    <div class="color-value" id="val-${item.key}">${colors[item.key]}</div>
+                </div>
+            `;
+            grid.appendChild(div);
+        });
+
+        // Add event listeners
+        colorItems.forEach(item => {
+            const picker = document.getElementById(`color-${item.key}`);
+            picker.addEventListener('input', (e) => {
+                colors[item.key] = e.target.value;
+                document.getElementById(`val-${item.key}`).textContent = e.target.value;
+                document.getElementById(`wrap-${item.key}`).style.background = e.target.value;
+                applyColors();
+                saveColors();
+            });
         });
     }
 
     function applyColors() {
-        // Update CSS variables
         document.documentElement.style.setProperty('--success', colors.namaz);
         document.documentElement.style.setProperty('--warning', colors.qaza);
         document.documentElement.style.setProperty('--secondary', colors.m);
         document.documentElement.style.setProperty('--primary', colors.primary);
         document.documentElement.style.setProperty('--accent', colors.quran);
+        document.documentElement.style.setProperty('--info', colors.money);
 
-        // Update specific elements
-        document.getElementById('icon-namaz').style.background = `${colors.namaz}33`;
-        document.getElementById('icon-pinterest').style.background = `${colors.pinterest}33`;
-        document.getElementById('icon-quran').style.background = `${colors.quran}33`;
-        document.getElementById('icon-tiktok').style.background = `${colors.tiktok}33`;
-        document.getElementById('icon-linkedin').style.background = `${colors.linkedin}33`;
-        document.getElementById('icon-mission').style.background = `${colors.mission}33`;
-        document.getElementById('icon-money').style.background = `${colors.money}33`;
-        document.getElementById('icon-m').style.background = `${colors.m}33`;
+        // Update icons
+        const iconIds = ['namaz', 'pinterest', 'quran', 'tiktok', 'linkedin', 'mission', 'm'];
+        iconIds.forEach(id => {
+            const icon = document.getElementById(`icon-${id}`);
+            if (icon) icon.style.background = `${colors[id]}33`;
+        });
 
         // Update cards
-        document.getElementById('card-namaz').style.borderColor = `${colors.namaz}33`;
-        document.getElementById('card-pinterest').style.borderColor = `${colors.pinterest}33`;
-        document.getElementById('card-quran').style.borderColor = `${colors.quran}33`;
-        document.getElementById('card-tiktok').style.borderColor = `${colors.tiktok}33`;
-        document.getElementById('card-linkedin').style.borderColor = `${colors.linkedin}33`;
-        document.getElementById('card-mission').style.borderColor = `${colors.mission}33`;
-        document.getElementById('card-money').style.borderColor = `${colors.money}33`;
-        document.getElementById('card-m').style.borderColor = `${colors.m}33`;
+        const cardIds = ['namaz', 'pinterest', 'quran', 'tiktok', 'linkedin', 'mission', 'm'];
+        cardIds.forEach(id => {
+            const card = document.getElementById(`card-${id}`);
+            if (card) card.style.borderColor = `${colors[id]}33`;
+        });
 
-        // Update buttons
+        // Update namaz buttons
         document.querySelectorAll('.namaz-btn.ada').forEach(btn => {
             btn.style.borderColor = `${colors.namaz}33`;
             btn.style.color = colors.namaz;
         });
         document.querySelectorAll('.namaz-btn.ada.active').forEach(btn => {
             btn.style.background = colors.namaz;
+            btn.style.color = 'white';
         });
         document.querySelectorAll('.namaz-btn.qaza').forEach(btn => {
             btn.style.borderColor = `${colors.qaza}33`;
@@ -986,18 +1254,26 @@
         });
         document.querySelectorAll('.namaz-btn.qaza.active').forEach(btn => {
             btn.style.background = colors.qaza;
+            btn.style.color = 'white';
         });
 
         // Update M
-        document.getElementById('mCheckbox').style.borderColor = colors.m;
-        document.getElementById('mCheckbox').style.color = colors.m;
-        if (document.getElementById('mCheckbox').classList.contains('active')) {
-            document.getElementById('mCheckbox').style.background = colors.m;
+        const mCheckbox = document.getElementById('mCheckbox');
+        if (mCheckbox) {
+            mCheckbox.style.borderColor = colors.m;
+            mCheckbox.style.color = colors.m;
+            if (mCheckbox.classList.contains('active')) {
+                mCheckbox.style.background = colors.m;
+            }
         }
 
         // Update money buttons
-        document.getElementById('btn-credit').style.background = colors.money;
-        document.getElementById('btn-debit').style.background = colors.m;
+        const btnIncome = document.querySelector('.btn-income');
+        const btnExpense = document.querySelector('.btn-expense');
+        const btnSavings = document.querySelector('.btn-savings');
+        if (btnIncome) btnIncome.style.background = `linear-gradient(135deg, ${colors.money}, #059669)`;
+        if (btnExpense) btnExpense.style.background = `linear-gradient(135deg, ${colors.m}, #dc2626)`;
+        if (btnSavings) btnSavings.style.background = `linear-gradient(135deg, ${colors.money}, #0891b2)`;
     }
 
     function saveColors() {
@@ -1006,17 +1282,7 @@
 
     function loadColors() {
         const saved = localStorage.getItem('efficiency_tracker_colors');
-        if (saved) {
-            colors = { ...colors, ...JSON.parse(saved) };
-            // Update pickers
-            Object.keys(colors).forEach(key => {
-                const picker = document.getElementById(`color-${key}`);
-                if (picker) {
-                    picker.value = colors[key];
-                    document.getElementById(`val-${key}`).textContent = colors[key];
-                }
-            });
-        }
+        if (saved) colors = { ...colors, ...JSON.parse(saved) };
     }
 
     function resetColors() {
@@ -1076,7 +1342,6 @@
             `;
             container.appendChild(row);
         });
-        applyColors();
     }
 
     function openDay(dateKey, dayNum, dayName) {
@@ -1092,7 +1357,22 @@
         document.getElementById('mStatus').textContent = '✓ Good! M avoided (+5 bonus)';
         document.getElementById('mStatus').className = 'm-status good';
         document.getElementById('missionInput').value = '';
-        document.getElementById('transactionsList').innerHTML = '';
+        
+        // Reset money inputs
+        document.getElementById('incomeSource').value = '';
+        document.getElementById('incomeAmount').value = '';
+        document.getElementById('expenseCategory').value = '';
+        document.getElementById('expenseItem').value = '';
+        document.getElementById('expenseAmount').value = '';
+        document.getElementById('savingsPurpose').value = '';
+        document.getElementById('savingsAmount').value = '';
+        
+        // Clear lists
+        document.getElementById('incomeList').innerHTML = '';
+        document.getElementById('expenseList').innerHTML = '';
+        document.getElementById('savingsList').innerHTML = '';
+        document.getElementById('allTransactionsList').innerHTML = '';
+        
         updateMoneyDisplay();
         
         if (monthlyData[dateKey]) {
@@ -1110,13 +1390,21 @@
             tiktok: { post1: false, post2: false, post3: false },
             linkedin: false,
             mission: { text: '', completed: false },
-            money: { credit: [], debit: [], totalCredit: 0, totalDebit: 0 },
+            money: {
+                income: [],
+                expense: [],
+                savings: [],
+                totalIncome: 0,
+                totalExpense: 0,
+                totalSavings: 0
+            },
             m: false,
             efficiency: 0
         };
     }
 
     function loadDayData(data) {
+        // Spiritual
         Object.keys(data.namaz).forEach(namaz => {
             const status = data.namaz[namaz];
             if (status) {
@@ -1124,11 +1412,17 @@
             }
         });
         
-        ['pinterest', 'quran', 'linkedin'].forEach(item => {
-            if (data[item]) {
-                document.querySelector(`[onclick="toggleSingle('${item}')"]`)?.classList.add('active');
-            }
-        });
+        if (data.quran) document.getElementById('btn-quran')?.classList.add('active');
+        
+        if (data.m) {
+            document.getElementById('mCheckbox').classList.add('active');
+            document.getElementById('mStatus').textContent = '✗ Bad! M done (no bonus)';
+            document.getElementById('mStatus').className = 'm-status bad';
+        }
+        
+        // Work
+        if (data.pinterest) document.getElementById('btn-pinterest')?.classList.add('active');
+        if (data.linkedin) document.getElementById('btn-linkedin')?.classList.add('active');
         
         Object.keys(data.tiktok).forEach(key => {
             if (data.tiktok[key]) {
@@ -1137,21 +1431,38 @@
         });
         
         if (data.mission.text) document.getElementById('missionInput').value = data.mission.text;
-        if (data.mission.completed) {
-            document.querySelector(`[onclick="toggleSingle('mission')"]`)?.classList.add('active');
-        }
+        if (data.mission.completed) document.getElementById('btn-mission')?.classList.add('active');
         
-        renderTransactions();
-        
-        if (data.m) {
-            document.getElementById('mCheckbox').classList.add('active');
-            document.getElementById('mStatus').textContent = '✗ Bad! M done (no bonus)';
-            document.getElementById('mStatus').className = 'm-status bad';
-        }
+        // Finance
+        renderAllTransactions();
+        updateMoneyDisplay();
+        updateAnalysis();
         
         applyColors();
     }
 
+    // Tab Switching
+    function switchTab(tabName) {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+        
+        event.target.classList.add('active');
+        document.getElementById(`tab-${tabName}`).classList.add('active');
+    }
+
+    function switchMoneyTab(tabName) {
+        document.querySelectorAll('.money-tab').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.money-content').forEach(content => content.classList.remove('active'));
+        
+        event.target.classList.add('active');
+        document.getElementById(`money-${tabName}`).classList.add('active');
+        
+        if (tabName === 'history') {
+            renderAllTransactions();
+        }
+    }
+
+    // Task Toggles
     function toggleNamaz(namaz, type) {
         const btns = document.querySelectorAll(`[onclick*="toggleNamaz('${namaz}'"]`);
         btns.forEach(btn => btn.classList.remove('active'));
@@ -1206,59 +1517,154 @@
         }
     }
 
-    function addMoney(type) {
-        const descInput = document.getElementById(type === 'credit' ? 'creditDesc' : 'debitDesc');
-        const amountInput = document.getElementById(type === 'credit' ? 'creditAmount' : 'debitAmount');
+    // Money Management
+    function addTransaction(type) {
+        let desc, amount, category, item;
         
-        const desc = descInput.value.trim();
-        const amount = parseFloat(amountInput.value) || 0;
-        
-        if (!desc || amount <= 0) {
-            alert('Please enter both description and amount!');
-            return;
+        if (type === 'income') {
+            desc = document.getElementById('incomeSource').value.trim();
+            amount = parseFloat(document.getElementById('incomeAmount').value) || 0;
+            if (!desc || amount <= 0) return alert('Please enter source and amount!');
+            
+            currentDayData.money.income.push({
+                id: Date.now(),
+                source: desc,
+                amount: amount,
+                time: new Date().toLocaleTimeString()
+            });
+            currentDayData.money.totalIncome += amount;
+            
+            document.getElementById('incomeSource').value = '';
+            document.getElementById('incomeAmount').value = '';
+            renderTransactions('income');
+            
+        } else if (type === 'expense') {
+            category = document.getElementById('expenseCategory').value.trim();
+            item = document.getElementById('expenseItem').value.trim();
+            amount = parseFloat(document.getElementById('expenseAmount').value) || 0;
+            if (!category || !item || amount <= 0) return alert('Please enter all details!');
+            
+            currentDayData.money.expense.push({
+                id: Date.now(),
+                category: category,
+                item: item,
+                amount: amount,
+                time: new Date().toLocaleTimeString()
+            });
+            currentDayData.money.totalExpense += amount;
+            
+            document.getElementById('expenseCategory').value = '';
+            document.getElementById('expenseItem').value = '';
+            document.getElementById('expenseAmount').value = '';
+            renderTransactions('expense');
+            
+        } else if (type === 'savings') {
+            desc = document.getElementById('savingsPurpose').value.trim();
+            amount = parseFloat(document.getElementById('savingsAmount').value) || 0;
+            if (!desc || amount <= 0) return alert('Please enter purpose and amount!');
+            
+            currentDayData.money.savings.push({
+                id: Date.now(),
+                purpose: desc,
+                amount: amount,
+                time: new Date().toLocaleTimeString()
+            });
+            currentDayData.money.totalSavings += amount;
+            
+            document.getElementById('savingsPurpose').value = '';
+            document.getElementById('savingsAmount').value = '';
+            renderTransactions('savings');
         }
         
-        currentDayData.money[type].push({ desc, amount, time: new Date().toLocaleTimeString() });
-        
-        if (type === 'credit') {
-            currentDayData.money.totalCredit += amount;
-        } else {
-            currentDayData.money.totalDebit += amount;
-        }
-        
-        descInput.value = '';
-        amountInput.value = '';
-        
-        renderTransactions();
         updateMoneyDisplay();
+        updateAnalysis();
     }
 
-    function renderTransactions() {
-        const list = document.getElementById('transactionsList');
-        list.innerHTML = '';
+    function deleteTransaction(type, id) {
+        const list = currentDayData.money[type];
+        const index = list.findIndex(t => t.id === id);
+        if (index > -1) {
+            const amount = list[index].amount;
+            list.splice(index, 1);
+            currentDayData.money[`total${type.charAt(0).toUpperCase() + type.slice(1)}`] -= amount;
+            renderTransactions(type);
+            updateMoneyDisplay();
+            updateAnalysis();
+        }
+    }
+
+    function renderTransactions(type) {
+        const container = document.getElementById(`${type}List`);
+        const list = currentDayData.money[type];
         
+        container.innerHTML = list.map(t => `
+            <div class="transaction-item transaction-${type}">
+                <button class="delete-btn" onclick="deleteTransaction('${type}', ${t.id})">×</button>
+                <div class="transaction-info">
+                    <div class="transaction-title">${t.source || t.category || t.purpose}${t.item ? ` - ${t.item}` : ''}</div>
+                    <div class="transaction-meta">${t.time}</div>
+                </div>
+                <div class="transaction-amount amount-${type}">${type === 'expense' ? '-' : '+'}₨${t.amount.toLocaleString()}</div>
+            </div>
+        `).join('');
+    }
+
+    function renderAllTransactions() {
+        const container = document.getElementById('allTransactionsList');
         const all = [
-            ...currentDayData.money.credit.map(t => ({...t, type: 'credit'})),
-            ...currentDayData.money.debit.map(t => ({...t, type: 'debit'}))
-        ].sort((a, b) => new Date(b.time) - new Date(a.time));
+            ...currentDayData.money.income.map(t => ({...t, type: 'income'})),
+            ...currentDayData.money.expense.map(t => ({...t, type: 'expense'})),
+            ...currentDayData.money.savings.map(t => ({...t, type: 'savings'}))
+        ].sort((a, b) => b.id - a.id);
         
-        all.forEach(t => {
-            const item = document.createElement('div');
-            item.className = 'transaction-item';
-            item.innerHTML = `
-                <span>${t.desc}</span>
-                <span class="transaction-${t.type}">${t.type === 'credit' ? '+' : '-'}₨${t.amount}</span>
-            `;
-            list.appendChild(item);
-        });
+        container.innerHTML = all.length ? all.map(t => `
+            <div class="transaction-item transaction-${t.type}">
+                <button class="delete-btn" onclick="deleteTransaction('${t.type}', ${t.id})">×</button>
+                <div class="transaction-info">
+                    <div class="transaction-title">${t.source || t.category || t.purpose}${t.item ? ` - ${t.item}` : ''}</div>
+                    <div class="transaction-meta">${t.time} • ${t.type.toUpperCase()}</div>
+                </div>
+                <div class="transaction-amount amount-${t.type}">${t.type === 'expense' ? '-' : '+'}₨${t.amount.toLocaleString()}</div>
+            </div>
+        `).join('') : '<div style="text-align: center; color: var(--text-muted); padding: 20px;">No transactions yet</div>';
     }
 
     function updateMoneyDisplay() {
-        const balance = currentDayData.money.totalCredit - currentDayData.money.totalDebit;
-        document.getElementById('netBalance').textContent = '₨' + balance.toLocaleString();
-        document.getElementById('netBalance').className = 'balance-amount ' + (balance >= 0 ? 'balance-positive' : 'balance-negative');
-        document.getElementById('totalIn').textContent = currentDayData.money.totalCredit.toLocaleString();
-        document.getElementById('totalOut').textContent = currentDayData.money.totalDebit.toLocaleString();
+        const m = currentDayData.money;
+        const netBalance = m.totalIncome - m.totalExpense - m.totalSavings;
+        
+        document.getElementById('dayTotalIncome').textContent = '₨' + m.totalIncome.toLocaleString();
+        document.getElementById('dayTotalExpense').textContent = '₨' + m.totalExpense.toLocaleString();
+        document.getElementById('dayTotalSavings').textContent = '₨' + m.totalSavings.toLocaleString();
+        
+        const netEl = document.getElementById('dayNetBalance');
+        netEl.textContent = '₨' + netBalance.toLocaleString();
+        netEl.className = 'summary-value ' + (netBalance >= 0 ? 'positive' : 'negative');
+    }
+
+    function updateAnalysis() {
+        const m = currentDayData.money;
+        const profit = m.totalIncome - m.totalExpense;
+        const savingsRate = m.totalIncome > 0 ? Math.round((m.totalSavings / m.totalIncome) * 100) : 0;
+        const profitMargin = m.totalIncome > 0 ? Math.round((profit / m.totalIncome) * 100) : 0;
+        
+        // Profit ratio bar
+        const ratio = m.totalIncome > 0 ? Math.min(100, Math.max(0, (profit / m.totalIncome) * 100)) : 50;
+        document.getElementById('profitRatio').style.width = ratio + '%';
+        
+        // Analysis values
+        document.getElementById('savingsRate').textContent = savingsRate + '%';
+        
+        const profitEl = document.getElementById('profitLossValue');
+        profitEl.textContent = (profit >= 0 ? '+' : '') + '₨' + profit.toLocaleString();
+        profitEl.className = 'analysis-value ' + (profit >= 0 ? 'positive' : 'negative');
+        
+        document.getElementById('burnRate').textContent = '₨' + m.totalExpense.toLocaleString();
+        
+        const projected = profit * 30; // Rough monthly projection
+        const projectedEl = document.getElementById('projectedMonthly');
+        projectedEl.textContent = (projected >= 0 ? '+' : '') + '₨' + projected.toLocaleString();
+        projectedEl.className = 'analysis-value ' + (projected >= 0 ? 'positive' : 'negative');
     }
 
     function calculateEfficiency() {
@@ -1271,11 +1677,11 @@
             maxScore += 2;
         });
         
-        if (currentDayData.pinterest) score += 2;
-        maxScore += 2;
-        
         if (currentDayData.quran) score += 3;
         maxScore += 3;
+        
+        if (currentDayData.pinterest) score += 2;
+        maxScore += 2;
         
         const tiktokCount = Object.values(currentDayData.tiktok).filter(v => v).length;
         score += tiktokCount;
@@ -1287,7 +1693,8 @@
         if (currentDayData.mission.completed) score += 3;
         maxScore += 3;
         
-        if (currentDayData.money.credit.length > 0 || currentDayData.money.debit.length > 0) score += 2;
+        // Money tracking bonus
+        if (currentDayData.money.income.length > 0 || currentDayData.money.expense.length > 0) score += 2;
         maxScore += 2;
         
         if (!currentDayData.m) score += 5;
@@ -1301,14 +1708,14 @@
         monthlyData[currentDay] = currentDayData;
         
         updateDayBadge(currentDay, currentDayData.efficiency);
-        localStorage.setItem('march2025_efficiency', JSON.stringify(monthlyData));
+        localStorage.setItem('march2025_complete_data', JSON.stringify(monthlyData));
         
         updateMonthlyStats();
         
         const btn = document.querySelector('.save-btn');
-        btn.innerHTML = '✅ Saved!';
+        btn.innerHTML = '✅ Saved Successfully!';
         setTimeout(() => {
-            btn.innerHTML = '💾 Save Day Progress';
+            btn.innerHTML = '💾 Save Complete Day Data';
             closeDetail();
         }, 1500);
     }
@@ -1335,75 +1742,90 @@
 
     function updateMonthlyStats() {
         let namazPoints = 0;
-        let totalPinterest = 0;
         let totalQuran = 0;
+        let totalPinterest = 0;
         let totalTiktok = 0;
         let totalLinkedin = 0;
-        let totalCredit = 0;
-        let totalDebit = 0;
         let mAvoided = 0;
         let totalEfficiency = 0;
         let daysCount = 0;
         
+        // Financial totals
+        let monthIncome = 0;
+        let monthExpense = 0;
+        let monthSavings = 0;
+        let incomeCount = 0;
+        let expenseCount = 0;
+        let savingsCount = 0;
+        
         Object.values(monthlyData).forEach(day => {
+            // Spiritual & Work
             Object.values(day.namaz).forEach(status => {
                 if (status === 'ada') namazPoints += 2;
                 else if (status === 'qaza') namazPoints += 1;
             });
             
-            if (day.pinterest) totalPinterest++;
             if (day.quran) totalQuran++;
+            if (day.pinterest) totalPinterest++;
             totalTiktok += Object.values(day.tiktok).filter(v => v).length;
             if (day.linkedin) totalLinkedin++;
-            
-            totalCredit += day.money.totalCredit;
-            totalDebit += day.money.totalDebit;
-            
             if (!day.m) mAvoided++;
             
             if (day.efficiency > 0) {
                 totalEfficiency += day.efficiency;
                 daysCount++;
             }
+            
+            // Financial
+            monthIncome += day.money.totalIncome;
+            monthExpense += day.money.totalExpense;
+            monthSavings += day.money.totalSavings;
+            incomeCount += day.money.income.length;
+            expenseCount += day.money.expense.length;
+            savingsCount += day.money.savings.length;
         });
         
+        // Update spiritual stats
         document.getElementById('statNamaz').textContent = namazPoints;
-        document.getElementById('statPinterest').textContent = totalPinterest;
         document.getElementById('statQuran').textContent = totalQuran;
+        document.getElementById('statPinterest').textContent = totalPinterest;
         document.getElementById('statTiktok').textContent = totalTiktok;
         document.getElementById('statLinkedin').textContent = totalLinkedin;
-        document.getElementById('statMoney').textContent = '₨' + (totalCredit - totalDebit).toLocaleString();
         document.getElementById('statMAvoided').textContent = mAvoided;
+        document.getElementById('statDaysTracked').textContent = daysCount;
         
         const avgEff = daysCount ? Math.round(totalEfficiency / daysCount) : 0;
         document.getElementById('statEfficiency').textContent = avgEff + '%';
         
-        const bar = document.getElementById('monthlyEfficiencyBar');
-        bar.style.width = avgEff + '%';
-        bar.textContent = avgEff + '%';
+        // Update financial stats
+        document.getElementById('monthIncome').textContent = '₨' + monthIncome.toLocaleString();
+        document.getElementById('monthIncomeCount').textContent = incomeCount + ' transactions';
         
-        const chips = document.getElementById('dayChips');
-        chips.innerHTML = '';
+        document.getElementById('monthExpense').textContent = '₨' + monthExpense.toLocaleString();
+        document.getElementById('monthExpenseCount').textContent = expenseCount + ' transactions';
         
-        Object.entries(monthlyData)
-            .filter(([_, d]) => d.efficiency > 0)
-            .sort(([a], [b]) => new Date(a) - new Date(b))
-            .forEach(([date, data]) => {
-                const dayNum = date.split('-')[2];
-                const chip = document.createElement('div');
-                chip.className = 'day-chip';
-                chip.textContent = `Mar ${dayNum}: ${data.efficiency}%`;
-                
-                if (data.efficiency >= 80) chip.style.background = colors.namaz;
-                else if (data.efficiency >= 50) chip.style.background = colors.qaza;
-                else chip.style.background = colors.m;
-                
-                chips.appendChild(chip);
-            });
+        document.getElementById('monthSavings').textContent = '₨' + monthSavings.toLocaleString();
+        document.getElementById('monthSavingsCount').textContent = savingsCount + ' deposits';
+        
+        const profit = monthIncome - monthExpense;
+        const profitEl = document.getElementById('monthProfit');
+        profitEl.textContent = (profit >= 0 ? '+' : '') + '₨' + profit.toLocaleString();
+        profitEl.style.color = profit >= 0 ? 'var(--success)' : 'var(--danger)';
+        
+        const profitPercent = monthIncome > 0 ? Math.round((profit / monthIncome) * 100) : 0;
+        document.getElementById('monthProfitPercent').textContent = profitPercent + '% margin';
+        
+        const cash = monthIncome - monthExpense;
+        const cashEl = document.getElementById('monthCash');
+        cashEl.textContent = '₨' + cash.toLocaleString();
+        cashEl.style.color = cash >= 0 ? 'var(--success)' : 'var(--danger)';
+        
+        const savingsRate = monthIncome > 0 ? Math.round((monthSavings / monthIncome) * 100) : 0;
+        document.getElementById('monthSavingsRate').textContent = savingsRate + '%';
     }
 
     function loadData() {
-        const saved = localStorage.getItem('march2025_efficiency');
+        const saved = localStorage.getItem('march2025_complete_data');
         if (saved) {
             monthlyData = JSON.parse(saved);
             Object.entries(monthlyData).forEach(([date, data]) => {
